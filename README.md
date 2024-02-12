@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/kerodekroma/python-pygame-loader/actions/workflows/build_pygame.yml/badge.svg)](https://github.com/kerodekroma/python-pygame-loader/actions/workflows/build_pygame.yml/badge.svg)
 
-This is the demo of the loader of python and pygame. LIVE DEMO LINK:
+This is the demo of the loader of python and pygame. LIVE DEMO LINK: https://kerodekroma.itch.io/python-pygame-loader
 
 ## Install Dependencies
 
