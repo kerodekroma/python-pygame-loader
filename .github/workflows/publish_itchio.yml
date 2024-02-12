@@ -1,0 +1,25 @@
+name: "Publish to itch.io"
+on:
+  release:
+    types: [published]
+jobs:
+  release_html:
+    runs-on: ubuntu-latest
+    name: fecth from GITHUB
+    steps:
+      - name: download zip file
+        id: download-html
+        uses: dsaltares/fetch-gh-release-asset@master
+        with:
+          file: python_pygame_loader_demo.zip
+        env:
+          GITHUB_TOKEN: "${{ secrets.GH_CREDENTIALS }}"
+      - name: deploy to itch.io (HTML5)
+        uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: HTML
+          ITCH_GAME: python-pygame-loader
+          ITCH_USER: kerodekroma
+          PACKAGE: python_pygame_loader_demo.zip
+          VERSION: ${{ steps.download-html.outputs.version }}

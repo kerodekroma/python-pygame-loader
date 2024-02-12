@@ -1,0 +1,42 @@
+name: Build this project using Pygbag
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: building project
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3.3.0
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: build
+        run: |
+          echo "Installing pygbag"
+          python3 -m pip install pygbag
+          echo "pygbag success!"
+          echo "building the project"
+          python3 -m pygbag --build $GITHUB_WORKSPACE/main.py
+          echo "DONE"
+          zip -j -r python_pygame_loader_demo.zip build/web
+
+      - name: Generate release tag
+        id: generate_release_tag
+        uses: alexvingg/next-release-tag@v1.0.4
+        with:
+          github_token: ${{ secrets.GH_CREDENTIALS }}
+          tag_prefix: ""
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          token: ${{ secrets.GH_CREDENTIALS }}
+          tag: ${{ steps.generate_release_tag.outputs.release_tag }}
+          artifacts: python_pygame_loader_demo.zip
