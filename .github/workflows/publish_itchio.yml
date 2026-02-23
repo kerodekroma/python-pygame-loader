@@ -15,11 +15,11 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GH_CREDENTIALS }}"
       - name: deploy to itch.io (HTML5)
-        uses: yeslayla/butler-publish-itchio-action@master
+        uses: Oval-Tutu/publish-to-itch-with-butler@v1
         env:
-          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          api-key: ${{ secrets.BUTLER_CREDENTIALS }}
+          itch_user: kerodekroma
+          itch_game: python-pygame-loader
           CHANNEL: HTML
-          ITCH_GAME: python-pygame-loader
-          ITCH_USER: kerodekroma
           PACKAGE: python_pygame_loader_demo.zip
           VERSION: ${{ steps.download-html.outputs.version }}
