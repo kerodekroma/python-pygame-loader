@@ -16,7 +16,7 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GH_CREDENTIALS }}"
       - name: deploy to itch.io (HTML5)
         uses: Oval-Tutu/publish-to-itch-with-butler@v1
-        env:
+        with:
           api-key: ${{ secrets.BUTLER_CREDENTIALS }}
           itch_user: kerodekroma
           itch_game: python-pygame-loader
