@@ -14,14 +14,19 @@ jobs:
           file: python_pygame_loader_demo.zip
         env:
           GITHUB_TOKEN: "${{ secrets.GH_CREDENTIALS }}"
+    outputs:
+      bundle_version: ${{ steps.download-html.outputs.version }}
   itchio_upload:
       runs-on: ubuntu-latest
+      needs: release_html
       steps:
         - name: Setup butler (HTML5)
           uses: remarkablegames/setup-butler@v2
 
         - name: Upload to itch.io
-          run: butler push python_pygame_loader_demo.zip kerodekroma/python-pygame-loader:html --userversion ${{ env.BUNDLE_VERSION }}
+          run: |
+           butler push python_pygame_loader_demo.zip \
+           kerodekroma/python-pygame-loader:html \
+           --userversion "${{ needs.release_html.outputs.bundle_version }}"
           env:
-            BUNDLE_VERSION: ${{ steps.download-html.outputs.version }}
             BUTLER_API_KEY: ${{ secrets.BUTLER_CREDENTIALS }}
