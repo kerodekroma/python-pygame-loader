@@ -21,6 +21,6 @@ jobs:
           uses: remarkablegames/setup-butler@v2
 
         - name: Upload to itch.io
-          run: butler push python_pygame_loader_demo.zip kerodekroma/python-pygame-loader:html -userversion ${{ steps.download-html.outputs.version }}
+          run: butler push python_pygame_loader_demo.zip kerodekroma/python-pygame-loader:html --userversion ${{ steps.download-html.outputs.version }}
           env:
             BUTLER_API_KEY: ${{ secrets.BUTLER_CREDENTIALS }}
