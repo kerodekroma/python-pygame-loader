@@ -15,7 +15,7 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GH_CREDENTIALS }}"
       - name: deploy to itch.io (HTML5)
-        uses: josephbmanley/butler-publish-itchio-action@master
+        uses: yeslayla/butler-publish-itchio-action@master
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
           CHANNEL: HTML
